@@ -1,5 +1,7 @@
 #include"BigInteger.h"
+#include"PrimeTable.h"
 #include<conio.h>
+#include<Windows.h>
 void Fibonacci()
 {
 	BigInteger anum = 1;
@@ -59,6 +61,29 @@ void BigIntSub()
 	BigInteger bnum(snum2);
 	cout << "result: " << anum.Sub(bnum) << endl;
 }
+
+void IntPrimeNumPrint()
+{
+	int upper = 0x7fffffff;
+	cout << "Please input count:" << endl;
+	cin >> upper;
+	if (upper<5 || upper >0x7fffffff)
+		upper = 100;
+	long beftime = GetTickCount();
+	PrimeTable mypt(upper);
+	long endtime = GetTickCount();
+	cout << "UseTime:" << endtime - beftime << endl;
+	cout << "Size:" << mypt.Size() << endl;
+	cout << "MaxPrime:" << mypt[mypt.Size()-1] << endl;
+	cout << "ValueAt100:" << mypt.ValueAtIndex(100) << endl;
+	cout << "IndexAt100:" << mypt.IndexAtValue(100)<<endl;
+	cout << "Primary Num :" << endl;
+	for (int i = 0; i < mypt.Size();i++)
+	{
+		cout << mypt[i] << "\t";
+	}
+	cout << endl;
+}
 int main()
 {
 	system("Color f1");
@@ -82,10 +107,11 @@ int main()
 		cout << "3.Pow x ^ n" << endl;
 		cout << "4.Factorial X!" << endl;
 		cout << "5.Big Integer Sub" << endl;
-		cout << "6.clean screen" << endl;
+		cout << "6.Print Primary Num Int" << endl;
+		cout << "7.clean screen" << endl;
 		cout << "0.exit" << endl;
 		char sel = 0;
-		while (sel<'0' || sel>'6')
+		while (sel<'0' || sel>'7')
 			sel = getch();
 		switch (sel - '0')
 		{
@@ -108,6 +134,9 @@ int main()
 			BigIntSub();
 			break;
 		case 6:
+			IntPrimeNumPrint();
+			break;
+		case 7:
 			system("cls");
 			break;
 		}
